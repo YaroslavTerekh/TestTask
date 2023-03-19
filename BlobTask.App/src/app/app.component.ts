@@ -1,6 +1,6 @@
+import { UploadsService } from './services/uploads.service';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UploadRequest } from './Interfaces/UploadRequest';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,8 @@ export class AppComponent {
   }
 
   constructor(
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly uploadsService: UploadsService
   ) {}
 
   ngOnInit(): void {
@@ -43,14 +44,15 @@ export class AppComponent {
     this.fileInvalid = this.checkFile(); 
 
     if(this.fileInvalid) {
-      let request: UploadRequest = {
-        email: this.uploadGroup.get('email')?.value,
-        file: this.selectedFile
-      };
+      let request: FormData =  new FormData();
+      request.append("email", this.uploadGroup.get('email')?.value);
+      request.append("file", this.selectedFile);
 
-      console.log(request);
-    }
-
-       
+      this.uploadsService.uploadFile(request)
+        .subscribe({
+          next: res => {
+          }
+        })
+    }       
   }
 }
