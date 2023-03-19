@@ -1,0 +1,86 @@
+.add-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .file {
+        width: 100%;
+        margin-bottom: 1.5vh;
+
+        h1 {
+            font-weight: 400;
+        }
+
+        button {
+            padding: 2vh;
+            border: none;
+            border-radius: 0%;
+            width: 100%;
+            font-size: 2vh;
+            cursor: pointer;
+            color: #fff;
+            background-color: #355886;
+            transition: .2s;
+        }
+
+        button:hover {
+            background-color: #406aa1;
+            transition: .2s;
+        }
+    }    
+
+    .email {
+        width: 100%;
+
+        p {
+            font-size: 1.8vh;
+            margin-bottom: .5vh;
+        }
+
+        input {
+            padding: 1vh;
+            width: calc(100% - 2vh);
+            border-radius: 0%;
+            border: 1px solid #c2c2c2;
+        }
+    }
+
+    .submit {
+        cursor: pointer;
+        border: none;
+        margin-top: 1vh;
+        padding: 1.5vh;
+        font-size: 1.8vh;
+        background-color: #287228;
+        color: #fff;
+        transition: .2s;
+    }
+
+    .submit:hover {
+        background-color: #359235;
+        transition: .2s;
+    }
+}
+
+.validation-messages {
+    color: #fff;
+    background-color: #881e1e;
+    border-radius: 4px;
+    position: absolute;
+    top: 100%;
+    transform: translate(3%, -110%);
+
+    ul {
+
+        li {
+            margin: 1vh;
+            background-color: rgb(190, 16, 16);
+            padding: 1vh;
+            border-radius: 4px;
+        }
+    }
+}
