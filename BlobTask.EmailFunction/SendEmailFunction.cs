@@ -21,10 +21,12 @@ namespace BlobTask.EmailFunction
     public class SendEmailFunction
     {
         private readonly IEmailSender _emailSender;
+        private readonly IBlobSettings _blobSettings;
 
-        public SendEmailFunction(IEmailSender emailSender)
+        public SendEmailFunction(IEmailSender emailSender, IBlobSettings blobSettings)
         {
             _emailSender = emailSender;
+            _blobSettings = blobSettings;
         }
 
         [FunctionName("SendEmailFunction")]
@@ -34,30 +36,7 @@ namespace BlobTask.EmailFunction
             ILogger log
         )
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(Environment.GetEnvironmentVariable("BlobConnectionString"));
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer container = blobClient.GetContainerReference("testcontainer");
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(name);
-            blockBlob.FetchAttributes();
-
-            string emailAddress = blockBlob.Metadata["email"];
-
-            var blobServiceClient = new BlobServiceClient(Environment.GetEnvironmentVariable("BlobConnectionString"));
-            var containerClient = blobServiceClient.GetBlobContainerClient("testcontainer");
-            var blobClient1 = containerClient.GetBlockBlobClient(name);
-            BlobSasBuilder sasBuilder = new BlobSasBuilder()
-            {
-                BlobContainerName = "testcontainer",
-                BlobName = name,
-                Resource = "b",
-                StartsOn = DateTimeOffset.UtcNow.AddMinutes(-5),
-                ExpiresOn = DateTimeOffset.UtcNow.AddMinutes(5),
-                Protocol = SasProtocol.Https,
-            };
-            sasBuilder.SetPermissions(BlobSasPermissions.Read);
-            var url = blobClient1.GenerateSasUri(sasBuilder);
-
-            var message = new Message(emailAddress, "Blob was uploaded", $"Your file <a href={url.OriginalString}>{name}</a> was uploaded");
+            var message = new Message(_blobSettings.GetEmailFromBlob(name), "Blob was uploaded", $"Your file <a href={_blobSettings.CreateUriFromBlob(name)}>{name}</a> was uploaded");
             _emailSender.SendEmail(message, "Azure notification");
         }
     }

@@ -35,6 +35,7 @@ namespace BlobTask.EmailFunction
             builder.Services.AddSingleton(emailConfig);
             builder.Services.AddSingleton(configuration);
             builder.Services.AddScoped<IEmailSender, EmailSender>();
+            builder.Services.AddTransient<IBlobSettings, BlobSettings>();
         }
     }
 }
