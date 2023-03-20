@@ -28,9 +28,14 @@ namespace BlobTask.Backend.Controllers
             CancellationToken cancellationToken = default
         )
         {
-            await _uploadFileCommandValidator.ValidateAsync(command, cancellationToken);
-            await _mediatr.Send(command, cancellationToken);
+            var result = await _uploadFileCommandValidator.ValidateAsync(command, cancellationToken);
 
+            if(!result.IsValid)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            await _mediatr.Send(command, cancellationToken);
             return Ok();
         }
     }
