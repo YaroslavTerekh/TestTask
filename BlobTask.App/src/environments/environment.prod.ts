@@ -1,4 +1,4 @@
 export const environment = {
-  apiAddress: 'https://localhost:7096/api',
+  apiAddress: 'https://reenbityaroslavterekhapi.azurewebsites.net/api',
   production: true
 };
