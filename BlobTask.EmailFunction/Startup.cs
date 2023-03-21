@@ -22,18 +22,16 @@ namespace BlobTask.EmailFunction
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables()
-                .Build();            
-
-            var emailConfig = configuration
-                .GetSection("EmailConfiguration")
-                .Get<EmailConfiguration>();
+            var emailConfig = new EmailConfiguration
+            { 
+                From = Environment.GetEnvironmentVariable("From"),
+                SmtpServer = "smtp.gmail.com",
+                Port = 465,
+                UserName = "yaroslav.terekh.reenbit@gmail.com",
+                Password = Environment.GetEnvironmentVariable("Password")
+            };
 
             builder.Services.AddSingleton(emailConfig);
-            builder.Services.AddSingleton(configuration);
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddTransient<IBlobSettings, BlobSettings>();
         }
