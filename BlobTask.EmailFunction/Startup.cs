@@ -15,25 +15,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 [assembly: FunctionsStartup(typeof(Startup))]
-namespace BlobTask.EmailFunction
+namespace BlobTask.EmailFunction;
+
+public class Startup : FunctionsStartup
 {
-
-    public class Startup : FunctionsStartup
+    public override void Configure(IFunctionsHostBuilder builder)
     {
-        public override void Configure(IFunctionsHostBuilder builder)
-        {
-            var emailConfig = new EmailConfiguration
-            { 
-                From = Environment.GetEnvironmentVariable("From"),
-                SmtpServer = "smtp.gmail.com",
-                Port = 465,
-                UserName = "yaroslav.terekh.reenbit@gmail.com",
-                Password = Environment.GetEnvironmentVariable("Password")
-            };
+        var emailConfig = new EmailConfiguration
+        { 
+            From = Environment.GetEnvironmentVariable("From"),
+            SmtpServer = "smtp.gmail.com",
+            Port = 465,
+            UserName = "slavik.terekh@gmail.com",
+            Password = Environment.GetEnvironmentVariable("Password")
+        };
 
-            builder.Services.AddSingleton(emailConfig);
-            builder.Services.AddScoped<IEmailSender, EmailSender>();
-            builder.Services.AddTransient<IBlobSettings, BlobSettings>();
-        }
+        builder.Services.AddSingleton(emailConfig);
+        builder.Services.AddScoped<IEmailSender, EmailSender>();
+        builder.Services.AddTransient<IBlobSettings, BlobSettings>();
     }
 }

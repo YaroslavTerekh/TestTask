@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlobTask.EmailFunction.Services.Abstractions
-{
-    public interface IBlobSettings
-    {
-        public string GetEmailFromBlob(string fileName);
+namespace BlobTask.EmailFunction.Services.Abstractions;
 
-        public string CreateUriFromBlob(string fileName);
-    }
+public interface IBlobSettings
+{
+    public string GetEmailFromBlob(string fileName);
+
+    public string CreateUriFromBlob(string fileName);
 }
