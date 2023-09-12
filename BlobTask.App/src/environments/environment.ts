@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiAddress: 'https://reenbityaroslavterekhapi.azurewebsites.net/api'
+  apiAddress: 'https://localhost:7096/api',
 };
 
 /*

@@ -5,7 +5,9 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlobTask.Backend", "BlobTask.Backend\BlobTask.Backend.csproj", "{F8B7CF3B-BB54-4426-9423-E4266C0F9BEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlobTask.EmailFunction", "BlobTask.EmailFunction\BlobTask.EmailFunction.csproj", "{9CE0B043-D25B-4410-8F71-3487E2ABC4EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlobTask.EmailFunction", "BlobTask.EmailFunction\BlobTask.EmailFunction.csproj", "{9CE0B043-D25B-4410-8F71-3487E2ABC4EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlobTask.Backend.Tests", "BlobTask.Backend.Tests\BlobTask.Backend.Tests.csproj", "{A229D0F5-9A4B-4011-A102-B8D5352301B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9CE0B043-D25B-4410-8F71-3487E2ABC4EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CE0B043-D25B-4410-8F71-3487E2ABC4EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CE0B043-D25B-4410-8F71-3487E2ABC4EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A229D0F5-9A4B-4011-A102-B8D5352301B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A229D0F5-9A4B-4011-A102-B8D5352301B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A229D0F5-9A4B-4011-A102-B8D5352301B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A229D0F5-9A4B-4011-A102-B8D5352301B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

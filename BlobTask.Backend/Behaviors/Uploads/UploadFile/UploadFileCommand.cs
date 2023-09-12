@@ -1,16 +1,15 @@
 ﻿using MediatR;
 
-namespace BlobTask.Backend.Behaviors.Uploads.UploadFile
+namespace BlobTask.Backend.Behaviors.Uploads.UploadFile;
+
+public class UploadFileCommand : IRequest<Dictionary<string, string>>
 {
-    public class UploadFileCommand : IRequest
+    public string Email { get; set; }
+
+    public IFormFile File { get; set; }
+
+    public UploadFileCommand()
     {
-        public string Email { get; set; }
 
-        public IFormFile File { get; set; }
-
-        public UploadFileCommand()
-        {
-
-        }
     }
 }

@@ -15,29 +15,28 @@ using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace BlobTask.EmailFunction
+namespace BlobTask.EmailFunction;
+
+[StorageAccount("BlobConnectionString")]
+public class SendEmailFunction
 {
-    [StorageAccount("BlobConnectionString")]
-    public class SendEmailFunction
+    private readonly IEmailSender _emailSender;
+    private readonly IBlobSettings _blobSettings;
+
+    public SendEmailFunction(IEmailSender emailSender, IBlobSettings blobSettings)
     {
-        private readonly IEmailSender _emailSender;
-        private readonly IBlobSettings _blobSettings;
+        _emailSender = emailSender;
+        _blobSettings = blobSettings;
+    }
 
-        public SendEmailFunction(IEmailSender emailSender, IBlobSettings blobSettings)
-        {
-            _emailSender = emailSender;
-            _blobSettings = blobSettings;
-        }
-
-        [FunctionName("SendEmailFunction")]
-        public void Run(
-            [BlobTrigger("testcontainer/{name}")] Stream myBlob, 
-            string name,
-            ILogger log
-        )
-        {
-            var message = new Message(_blobSettings.GetEmailFromBlob(name), "Blob was uploaded", $"Your file <a href={_blobSettings.CreateUriFromBlob(name)}>{name}</a> was uploaded");
-            _emailSender.SendEmail(message, "Azure notification");
-        }
+    [FunctionName("SendEmailFunction")]
+    public void Run(
+        [BlobTrigger("photos/{name}")] Stream myBlob, 
+        string name,
+        ILogger log
+    )
+    {
+        var message = new Message(_blobSettings.GetEmailFromBlob(name), "Blob was uploaded", $"Your file <a href={_blobSettings.CreateUriFromBlob(name)}>{name}</a> was uploaded <br> <hr> <br> <strong>Link will be valid for 1 hour</strong>");
+        _emailSender.SendEmail(message, "Azure notification");
     }
 }
