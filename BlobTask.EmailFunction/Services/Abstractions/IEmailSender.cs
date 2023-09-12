@@ -6,10 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlobTask.EmailFunction.Services.Abstractions
+namespace BlobTask.EmailFunction.Services.Abstractions;
+
+public interface IEmailSender
 {
-    public interface IEmailSender
-    {
-        public void SendEmail(Message message, string name);
-    }
+    public void SendEmail(Message message, string name);
 }
