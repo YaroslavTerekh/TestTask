@@ -2,7 +2,7 @@
 
 namespace BlobTask.Backend.Behaviors.Uploads.UploadFile
 {
-    public class UploadFileCommand : IRequest
+    public class UploadFileCommand : IRequest<Dictionary<string, string>>
     {
         public string Email { get; set; }
 
